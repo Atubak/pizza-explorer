@@ -49,9 +49,14 @@ export const pizzaSlice = createSlice({
 
       state.allPizzas.push(newPizza);
     },
+    deletePizza: (state, action) => {
+      const id = action.payload;
+
+      state.allPizzas = state.allPizzas.filter((pizza) => pizza.id !== id);
+    },
   },
 });
 
-export const { addPizza } = pizzaSlice.actions;
+export const { addPizza, deletePizza } = pizzaSlice.actions;
 
 export default pizzaSlice.reducer;

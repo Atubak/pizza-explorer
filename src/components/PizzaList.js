@@ -9,6 +9,7 @@ import { selectUser } from "../store/user/selectors";
 
 import { useDispatch } from "react-redux";
 import { toggleFavorites } from "../store/user/slice";
+import { deletePizza } from "../store/pizzas/slice";
 
 export default function PizzaList() {
   const user = useSelector(selectUser);
@@ -28,7 +29,8 @@ export default function PizzaList() {
         {pizzas.map((pizza) => (
           <li key={pizza.id}>
             <p>
-              <strong>{pizza.name}</strong>
+              <strong>{pizza.name}</strong>{" "}
+              <button onClick={() => dispatch(deletePizza(pizza.id))}>X</button>
               <br />
               {pizza.description}
               <br />
