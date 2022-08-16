@@ -7,10 +7,15 @@ import {
 
 import { selectUser } from "../store/user/selectors";
 
+import { useDispatch } from "react-redux";
+import { toggleFavorites } from "../store/user/slice";
+
 export default function PizzaList() {
   const user = useSelector(selectUser);
   const pizzas = useSelector(selectListOfPizzas);
   const pizzaAmount = useSelector(selectNumberOfPizzas);
+
+  const dispatch = useDispatch();
 
   return (
     <div>
@@ -28,6 +33,14 @@ export default function PizzaList() {
               {pizza.description}
               <br />
               times bought: <strong>{pizza.bought}</strong>
+              <br />
+              <button onClick={() => dispatch(toggleFavorites(pizza.id))}>
+                {user.favorites.find((favId) => {
+                  return favId === pizza.id;
+                })
+                  ? "♥"
+                  : "♡"}
+              </button>
             </p>
           </li>
         ))}
@@ -36,3 +49,4 @@ export default function PizzaList() {
     </div>
   );
 }
+// ♡♥

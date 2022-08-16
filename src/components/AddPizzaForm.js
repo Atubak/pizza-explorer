@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { addPizza } from "../store/pizzas/slice";
+import { useDispatch } from "react-redux";
 
 export default function AddPizzaForm() {
+  const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
 
@@ -8,6 +11,16 @@ export default function AddPizzaForm() {
     event.preventDefault();
 
     console.log("newpizza", name, description);
+
+    dispatch(
+      addPizza({
+        name: name,
+        description: description,
+      })
+    );
+
+    setName("");
+    setDescription("");
   };
   return (
     <form onSubmit={submit}>
